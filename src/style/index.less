@@ -1,0 +1,192 @@
+
+.mini-sandbox {
+
+  // --white: #ececfe;
+  // --greyLight-2: #dbe1f3;
+
+  --white: #eee;
+  --greyLight-1: #E4EBF5;
+  --greyLight-2: #c8d0e7;
+  --greyLight-3: #bec8e4;
+  --greyDark: #9baacf;
+  @shadow: .3rem .3rem .6rem var(--greyLight-2), 
+            -.2rem -.2rem .5rem var(--white);
+  @inner-shadow: inset .2rem .2rem .5rem var(--greyLight-2), 
+                inset -.2rem -.2rem .5rem var(--white);
+  @hd-height: 36px;
+  background-color: #fff;
+  overflow: hidden;
+  box-shadow: @shadow;
+  .sandbox-head {
+    display: flex;
+    align-items: center;
+    height: @hd-height;
+    font-size: 14px;
+    background: var(--bgColor);
+    user-select: none;
+    overflow: hidden;
+    padding: 0 8px;
+    .sandbox-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 3px 4px;
+      margin: 0 4px;
+      cursor: pointer;
+      border-radius: 5px;
+      &>svg {
+        color: #9baacf;
+        width: 20px;
+        height: 20px;
+      }
+      &.icon-active:hover {
+        box-shadow: @shadow;
+      }
+      &.icon-active:active {
+        box-shadow: @inner-shadow;
+      }
+    }
+    .sandbox-setting {
+      margin-left: -3px;
+      line-height: @hd-height;
+      text-align: center;
+      font-size: 20px;
+      color: var(--fontColor);
+      cursor: pointer;
+      font-weight: 300;
+    }
+    .sandbox-tab {
+      height: 100%;
+      flex: 1;
+      padding: 0 20px 0 0px;
+      display: flex;
+      align-items: flex-end;
+      .sandbox-tab-item {
+        height: 82%;
+        display: flex;
+        align-items: center;
+        padding: 0px 15px;
+        font-size: 13px;
+        cursor: pointer;
+        .sandbox-icon {
+          float: right;
+          width: 12px;
+          height: 12px;
+          margin-right: -8px;
+        }
+      }
+      .sandbox-tab-active {
+        position: relative;
+        background: #FFFFFF;
+        border-radius: 6px 6px 0 0;
+        box-shadow: @shadow;
+        &::before {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 6px;
+          height: 6px;
+          left: -6px;
+          bottom: 0;
+          background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 100c55.228 0 100-44.772 100-100v100H0z' fill='%23FFFFFF'/%3E%3C/svg%3E");
+          background-size: 6px 6px;
+          // box-shadow: @shadow;
+        }
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 6px;
+          height: 6px;
+          right: -6px;
+          bottom: 0;
+          background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M100 100C44.772 100 0 55.228 0 0v100h100z' fill='%23FFFFFF'/%3E%3C/svg%3E");
+          background-size: 6px 6px;
+          // box-shadow: @shadow;
+        }
+      }
+    }
+  }
+  .sandbox-body {
+    display: flex;
+    height: calc(100% - @hd-height);
+  }
+  iframe, .cm-editor {
+    width: 100%;
+    height: 100%;
+    outline: none !important;
+    overflow: auto;
+  }
+  .sandbox-code {
+    width: 50%;
+    max-width: 100vw;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .sandbox-gutter {
+    width: 5px;
+    border-left: 1px solid var(--bgColor);
+    border-right: 1px solid var(--bgColor);
+    background-color: #f7f8fa;
+    cursor: col-resize;
+    box-sizing: border-box;
+    &:active, &:hover {
+      background-color: var(--bgColor);
+    }
+    &.no-dragging {
+      cursor: auto;
+      &:active, &:hover {
+        background-color: #f7f8fa;
+      }
+    }
+  }
+  .sandbox-render {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    flex: 1;
+    position: relative;
+    box-sizing: border-box;
+    &>iframe {
+      margin: 0;
+      border: 0 none;
+    }
+    .sandbox-loading {
+      position: absolute;
+      left: 0;
+      top: @hd-height;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.9);
+      display: none;
+      &::before {
+        content: 'loading...';
+        display: block;
+        margin:  auto;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 20px;
+        height: 20px;
+        color: var(--fontColor);
+      }
+    }
+  }
+  .sandbox-mask {
+    cursor: col-resize;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-color: rgba(0, 0, 0, 0);
+  }
+  .cm-gutters {
+    background-color: var(--bgColor);
+    border: 0 none;
+  }
+}

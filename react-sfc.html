@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+<div id="sandbox-demo10"></div>
+<script src="https://unpkg.com/mini-sandbox@0.3.11"></script>
+<script src="https://unpkg.com/mini-sandbox@0.3.11/dist/react-loader.js"></script>
+<!-- <script src="./dist/index.umd.js"></script>
+<script src="./dist/react-loader.js"></script> -->
+
+<script type="text/javascript">
+  new MiniSandbox({
+    el: '#sandbox-demo10',
+    files: {
+      'App.jsx': {
+        urlField: 'code',
+        defaultValue: `import React, { useState } from 'react'
+import antd from 'antd'
+
+const { Button, Pagination, Badge, Space, Switch, Alert } = antd
+
+export default function App() {
+  const [show, setShow] = useState(true)
+  return <>
+    {/* 按钮组件 */}
+    <Space>
+      <Button type="primary">普通按钮</Button>
+      <Button type="primary" loading>加载中</Button>
+      <Button type="primary" danger>危险按钮</Button>
+      <Button type="link">文字按钮</Button>
+      <Button>默认按钮</Button>
+    </Space>
+    <Button type="primary" block>超长按钮</Button>
+    {/* 徽章组件 */}
+    <Space>
+      <Switch checked={show} onChange={() => setShow(!show)} />
+      <Badge count={show ? 25 : 0} />
+      <Badge
+        count={show ? 109 : 0}
+        style={{ backgroundColor: '#52c41a' }}
+      />
+    </Space>
+    {/* 分页组件 */}
+    <div>
+      <Pagination
+        showSizeChanger
+        defaultCurrent={3}
+        total={500}
+      />
+    </div>
+    {/* 警告提示 */}
+    <Alert message="Success Tips" type="success" showIcon />
+    <Alert message="Informational Notes" type="info" showIcon />
+    <Alert message="Warning" type="warning" showIcon closable />
+    <Alert message="Error" type="error" showIcon />
+  </>
+}`,
+        importMap: {
+          "imports": {
+            "react": "https://ga.jspm.io/npm:react@17.0.2/index.js",
+            "react-dom": "https://ga.jspm.io/npm:react-dom@17.0.2/index.js",
+            "antd": "https://ga.jspm.io/npm:antd@4.20.1/dist/antd.js",
+            "moment": "https://ga.jspm.io/npm:moment@2.29.3/moment.js",
+            "@lucky-canvas/react": "https://unpkg.com/@lucky-canvas/react@0.1.7/dist/index.esm.js"
+          },
+          "scopes": {
+            "https://ga.jspm.io/": {
+              "object-assign": "https://ga.jspm.io/npm:object-assign@4.1.1/index.js",
+              "scheduler": "https://ga.jspm.io/npm:scheduler@0.20.2/index.js",
+              "scheduler/tracing": "https://ga.jspm.io/npm:scheduler@0.20.2/tracing.js",
+            }
+          }
+        },
+        cssLibs: ['https://unpkg.com/antd@4.20.1/dist/antd.min.css'],
+        css: `body { padding: 10px; } #root>div { margin: 10px 0; }`,
+      },
+    },
+    loaders: {
+      '.jsx': SandboxReactLoader
+    },
+    defaultConfig: {
+      height: '100vh'
+    }
+  })
+</script>
+</body>
+</html>
